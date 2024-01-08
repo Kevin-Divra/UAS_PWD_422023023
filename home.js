@@ -13,6 +13,7 @@ const phone = document.getElementById('phone');
 const form = document.getElementById('form');
 
 
+
 form.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -22,6 +23,11 @@ form.addEventListener('submit', e => {
 const setError = (element, message) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ada yang salah!",
+      });
 
     errorDisplay.innerText = message;
     inputControl.classList.add('error');
@@ -31,6 +37,11 @@ const setError = (element, message) => {
 const setSuccess = element => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
+    Swal.fire({
+        title: "Pesan Berhasil di Kirim",
+        text: "Terimakasih Telah Menghubungi Kami",
+        icon: "success"
+      });
 
     errorDisplay.innerText = ''; 
     inputControl.classList.add('success');
@@ -154,4 +165,30 @@ function show(){
 function close(){
     mainMenu.style.top = '-100%';
 }
+
+
+const btn = document.getElementById('button');
+
+
+
+btn.addEventListener('click',function() {
+    Swal.fire({
+        title: "Apakah Anda Yakin?",
+        text: "Anda Tidak Dapat Mengubah Pesanan Ini!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, Pesan sekarang!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Pesanan Diterima",
+            text: "Silahakan tunggu pemberitahuan selanjutnya.",
+            icon: "success"
+          });
+        }
+      });
+})
+
 
